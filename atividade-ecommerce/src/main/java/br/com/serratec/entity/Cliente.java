@@ -124,6 +124,11 @@ public class Cliente {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+	@Override
+	public String toString() {
+		return "Id:" + id + "\n" + "Nome:" + nome + "\n" + "Email:" + email + "\n";
+	}
+
 	
 	
 }

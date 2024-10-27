@@ -15,8 +15,7 @@ import io.swagger.v3.oas.models.servers.Server;
 @Configuration
 public class OpenApiConfig {
 
-	//o value captura o valor entre 
-	//parenteses la do application.properties
+	
 	@Value("${dominio.openapi.dev-url}")
 	private String devUrl;
 	
@@ -48,6 +47,6 @@ public class OpenApiConfig {
 				.license(apacheLicense);
 		//4)
 		return new OpenAPI().info(info).servers(List.of(devServer,prodServer));
-		//List.of() passa informações que não podem ser modificadas
+	
 	}
 }
