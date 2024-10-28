@@ -1,3 +1,3 @@
 package br.com.serratec.dto;
 
-public record LoginRequestDTO(String email, String password){}
+public record LoginRequestDTO(String email, String senha){}

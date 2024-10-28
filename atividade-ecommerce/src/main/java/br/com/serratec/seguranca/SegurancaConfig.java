@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SegurancaConfig {
 
 //    @Autowired
 //    private DetalheDeServico userDetailsService;
@@ -24,7 +24,7 @@ public class SecurityConfig {
     @Autowired
     SecurityFilter securityFilter;
 
-    @SuppressWarnings("removal")
+    @SuppressWarnings("remover")
 	@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

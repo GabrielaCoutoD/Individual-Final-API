@@ -37,7 +37,7 @@ public class UsuarioController {
 	        this.tokenService = tokenService;
 	}
 
-	@Operation(summary = "Faz um login via token", description = "A resposta um nome de user e seu token pra mexer no sistema.")
+	@Operation(summary = "Faz um login via token", description = "A resposta um nome de usuario e seu token pra mexer no sistema.")
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", content = {
 			@Content(schema = @Schema(implementation = Usuario.class), mediaType = "application/json") }, description = "Usuario logado com sucesso"),
 			@ApiResponse(responseCode = "401", description = "Erro de autenticação"),
@@ -46,18 +46,18 @@ public class UsuarioController {
 			@ApiResponse(responseCode = "505", description = "Exceção interna da aplicação") })
 	@PostMapping("/login")
 	public ResponseEntity<Object> login(@RequestBody LoginRequestDTO body) {
-		Usuario user = this.repository.findByEmail(body.email())
+		Usuario usuario = this.repository.findByEmail(body.email())
 				.orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
-		if (passwordEncoder.matches(body.password(), user.getPassword())) {
-			String token = this.tokenService.generateToken(user);
-			return ResponseEntity.ok(new LoginResponseDTO(user.getNome(), token));
+		if (passwordEncoder.matches(body.senha(), usuario.getSenha())) {
+			String token = this.tokenService.generateToken(usuario);
+			return ResponseEntity.ok(new LoginResponseDTO(usuario.getNome(), token));
 		}
 		return ResponseEntity.badRequest().build();
 	}
 
-	@Operation(summary = "Insere um novo cadastro de admin", description = "A resposta retorna um novo cadastro")
+	@Operation(summary = "Insere um novo cadastro de administrador", description = "A resposta retorna um novo cadastro")
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", content = {
-			@Content(schema = @Schema(implementation = Usuario.class), mediaType = "application/json") }, description = "Admin cadastrado com sucesso"),
+			@Content(schema = @Schema(implementation = Usuario.class), mediaType = "application/json") }, description = "Administrador cadastrado com sucesso"),
 			@ApiResponse(responseCode = "401", description = "Erro de autenticação"),
 			@ApiResponse(responseCode = "403", description = "Não há permissão para acessar o recurso"),
 			@ApiResponse(responseCode = "404", description = "Recurso não encontrado"),
@@ -70,7 +70,7 @@ public class UsuarioController {
 			Usuario newUser = new Usuario();
 			newUser.setNome(body.nome());
 			newUser.setEmail(body.email());
-			newUser.setPassword(passwordEncoder.encode(body.password()));
+			newUser.setSenha(passwordEncoder.encode(body.senha()));
 			newUser.setRole(body.role());
 			this.repository.save(newUser);
 

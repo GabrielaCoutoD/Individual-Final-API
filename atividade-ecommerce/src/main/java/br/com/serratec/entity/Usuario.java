@@ -38,7 +38,7 @@ public class Usuario {
 	@Schema(description = "Email do cliente") 
 	private String email; // Login
 
-	private String password;
+	private String senha;
 
 	@Enumerated(EnumType.ORDINAL)
 	private UsuarioRole role;
@@ -73,12 +73,12 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 
